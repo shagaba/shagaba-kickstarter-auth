@@ -1,12 +1,9 @@
 package com.shagaba.kickstarter.auth.core.repository.security;
 
-import javax.annotation.Resource;
-
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.shagaba.kickstarter.auth.core.domain.security.Authority;
 
-@Resource
-public interface AuthorityRepository extends PagingAndSortingRepository<Authority, String> {
+public interface AuthorityRepository extends MongoRepository<Authority, String> {
 
 }

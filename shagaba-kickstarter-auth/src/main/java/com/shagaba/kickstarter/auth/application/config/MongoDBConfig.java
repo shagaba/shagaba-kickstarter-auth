@@ -1,6 +1,8 @@
 package com.shagaba.kickstarter.auth.application.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -25,14 +27,14 @@ import com.mongodb.MongoClientURI;
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
     @Value("${mongodb.db}")
-    private String db;
+    private String databaseName;
     
     @Value("${mongodb.url}")
     private String url;
 
     @Override
     protected String getDatabaseName() {
-        return db;
+        return databaseName;
     }
 
     @Override
