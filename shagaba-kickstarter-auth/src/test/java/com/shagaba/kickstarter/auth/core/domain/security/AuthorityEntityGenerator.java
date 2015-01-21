@@ -2,18 +2,15 @@ package com.shagaba.kickstarter.auth.core.domain.security;
 
 import org.springframework.stereotype.Component;
 
-import com.shagaba.kickstarter.auth.core.common.domain.AbstractEntityProducer;
+import com.shagaba.kickstarter.auth.core.common.domain.AbstractEntityGenerator;
 import com.shagaba.kickstarter.auth.core.domain.security.Authority;
 
 @Component
-public class AuthorityEntityProducer extends AbstractEntityProducer<Authority, String>{
+public class AuthorityEntityGenerator extends AbstractEntityGenerator<Authority, String> {
 
 	@Override
-	public Authority produce(String id, String tag) {
-		Authority entity = new Authority();
-		entity.setId(id);
-		update(entity, tag);
-		return entity;
+	public Class<Authority> entityClass() {
+		return Authority.class;
 	}
 
 	@Override
@@ -21,6 +18,11 @@ public class AuthorityEntityProducer extends AbstractEntityProducer<Authority, S
 		if (tag != null && !tag.isEmpty()) {
 			entity.setDescription(tag);
 		}
+	}
+
+	@Override
+	public String getId(Authority entity) {
+		return entity.getId();
 	}
 
 }
