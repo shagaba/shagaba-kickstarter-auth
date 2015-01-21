@@ -1,11 +1,9 @@
 package com.shagaba.kickstarter.auth.core.repository.profile;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.shagaba.kickstarter.auth.core.domain.profile.PersonalInformation;
 
-@Repository
-public interface PersonalInformationRepository extends MongoRepository<PersonalInformation, String> {
+public interface PersonalInformationRepository extends PagingAndSortingRepository<PersonalInformation, String> {
 
 }
