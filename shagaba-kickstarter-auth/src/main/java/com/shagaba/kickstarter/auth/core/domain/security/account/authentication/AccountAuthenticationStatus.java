@@ -197,6 +197,70 @@ public class AccountAuthenticationStatus extends AuditingDomain {
     public void setPasswordStatus(PasswordStatus passwordStatus) {
         this.passwordStatus = passwordStatus;
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountToken == null) ? 0 : accountToken.hashCode());
+		result = prime * result + (isEmailVerified ? 1231 : 1237);
+		result = prime * result + (isRegistered ? 1231 : 1237);
+		result = prime * result + ((lockoutExperation == null) ? 0 : lockoutExperation.hashCode());
+		result = prime * result + ((lockoutType == null) ? 0 : lockoutType.hashCode());
+		result = prime * result + ((logingAuthTraking == null) ? 0 : logingAuthTraking.hashCode());
+		result = prime * result + ((passwordStatus == null) ? 0 : passwordStatus.hashCode());
+		result = prime * result + ((tokenAuthTraking == null) ? 0 : tokenAuthTraking.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountAuthenticationStatus other = (AccountAuthenticationStatus) obj;
+		if (accountToken == null) {
+			if (other.accountToken != null)
+				return false;
+		} else if (!accountToken.equals(other.accountToken))
+			return false;
+		if (isEmailVerified != other.isEmailVerified)
+			return false;
+		if (isRegistered != other.isRegistered)
+			return false;
+		if (lockoutExperation == null) {
+			if (other.lockoutExperation != null)
+				return false;
+		} else if (!lockoutExperation.equals(other.lockoutExperation))
+			return false;
+		if (lockoutType != other.lockoutType)
+			return false;
+		if (logingAuthTraking == null) {
+			if (other.logingAuthTraking != null)
+				return false;
+		} else if (!logingAuthTraking.equals(other.logingAuthTraking))
+			return false;
+		if (passwordStatus == null) {
+			if (other.passwordStatus != null)
+				return false;
+		} else if (!passwordStatus.equals(other.passwordStatus))
+			return false;
+		if (tokenAuthTraking == null) {
+			if (other.tokenAuthTraking != null)
+				return false;
+		} else if (!tokenAuthTraking.equals(other.tokenAuthTraking))
+			return false;
+		return true;
+	}
     
     
 }
