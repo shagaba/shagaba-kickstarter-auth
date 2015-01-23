@@ -18,18 +18,33 @@ import java.util.UUID;
 
 public class RandomObjectFiller {
 	private static final int MAX_COPIES = 3;
-	public static final String CHARS = "123467890.abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public static final String CHARS = "123467890.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	private static final Random RANDOM = new Random();
 
+	/**
+	 * @param objectClass
+	 * @return
+	 */
 	public static <T> T randomObject(Class<T> objectClass) {
 		return randomObject(objectClass, null);
 	}
 
+	/**
+	 * @param objectClass
+	 * @param typeClass1
+	 * @return
+	 */
 	public static <T, V> T randomObject(Class<T> objectClass, Class<V> typeClass1) {
 		return randomObject(objectClass, typeClass1, null);
 	}
 
+	/**
+	 * @param objectClass
+	 * @param typeClass1
+	 * @param typeClass2
+	 * @return
+	 */
 	public static <T, V, W> T randomObject(Class<T> objectClass, Class<V> typeClass1, Class<W> typeClass2) {
 		T object = null;
 		try {
@@ -103,46 +118,79 @@ public class RandomObjectFiller {
 		return object;
 	}
 
+	/**
+	 * @return
+	 */
 	public static Boolean randomBoolean() {
 		return RANDOM.nextBoolean();
 	}
 
+	/**
+	 * @return
+	 */
 	public static Byte randomByte() {
 		return (byte) (Byte.MIN_VALUE + RANDOM.nextInt((int) Byte.MAX_VALUE - Byte.MIN_VALUE));
 	}
 
+	/**
+	 * @return
+	 */
 	public static Short randomShort() {
 		return (short) (Short.MIN_VALUE + RANDOM.nextInt(Short.MAX_VALUE - Short.MIN_VALUE));
 	}
 
+	/**
+	 * @return
+	 */
 	public static Integer randomInt() {
 		return RANDOM.nextInt();
 	}
 
+	/**
+	 * @return
+	 */
 	public static Long randomLong() {
 		return RANDOM.nextLong();
 	}
 
+	/**
+	 * @return
+	 */
 	public static BigInteger randomBigInteger() {
 		return BigInteger.valueOf(randomLong()).multiply(BigInteger.valueOf(randomLong()));
 	}
 
+	/**
+	 * @return
+	 */
 	public static Float randomFloat() {
 		return RANDOM.nextFloat();
 	}
 
+	/**
+	 * @return
+	 */
 	public static Double randomDouble() {
 		return RANDOM.nextDouble();
 	}
 
+	/**
+	 * @return
+	 */
 	public static BigDecimal randomBigDecimal() {
 		return BigDecimal.valueOf(randomDouble()).multiply(BigDecimal.valueOf(randomDouble()));
 	}
 
+	/**
+	 * @return
+	 */
 	public static Character randomChar() {
 		return CHARS.charAt(RANDOM.nextInt(CHARS.length()));
 	}
 
+	/**
+	 * @return
+	 */
 	public static String randomString() {
 		int length = 20 + RANDOM.nextInt(20);
 		StringBuilder sb = new StringBuilder(length);
@@ -152,6 +200,9 @@ public class RandomObjectFiller {
 		return sb.toString();
 	}
 
+	/**
+	 * @return
+	 */
 	public static UUID randomUuid() {
 		return UUID.randomUUID();
 	}
@@ -160,13 +211,23 @@ public class RandomObjectFiller {
 		return randomCalendar().getTime();
 	}
 
+	/**
+	 * @return
+	 */
 	public static Calendar randomCalendar() {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(1990 + RANDOM.nextInt(100), RANDOM.nextInt(12), 1 + RANDOM.nextInt(28), RANDOM.nextInt(24), RANDOM.nextInt(60),
-				RANDOM.nextInt(60));
+		int currentYear = calendar.get(Calendar.YEAR);
+		calendar.set(currentYear - 40 + RANDOM.nextInt(80), RANDOM.nextInt(12), 1 + RANDOM.nextInt(28), RANDOM.nextInt(24),
+				RANDOM.nextInt(60), RANDOM.nextInt(60));
 		return calendar;
 	}
 
+	/**
+	 * @param mapClass
+	 * @param keyClass
+	 * @param valueClass
+	 * @return
+	 */
 	public static <T extends Map<V, W>, V, W> T randomMap(Class<T> mapClass, Class<V> keyClass, Class<W> valueClass) {
 		T mapObject = null;
 		try {
@@ -183,6 +244,14 @@ public class RandomObjectFiller {
 		return mapObject;
 	}
 
+	/**
+	 * @return
+	 */
+	/**
+	 * @param listClass
+	 * @param valueClass
+	 * @return
+	 */
 	public static <T extends List<V>, V> T randomList(Class<T> listClass, Class<V> valueClass) {
 		T listObject = null;
 		try {
@@ -199,6 +268,11 @@ public class RandomObjectFiller {
 		return listObject;
 	}
 
+	/**
+	 * @param setClass
+	 * @param valueClass
+	 * @return
+	 */
 	public static <T extends Set<V>, V> T randomSet(Class<T> setClass, Class<V> valueClass) {
 		T setObject = null;
 		try {
@@ -215,6 +289,11 @@ public class RandomObjectFiller {
 		return setObject;
 	}
 
+	/**
+	 * @param collectionClass
+	 * @param valueClass
+	 * @return
+	 */
 	public static <T extends Collection<V>, V> T randomCollection(Class<T> collectionClass, Class<V> valueClass) {
 		T collectionObject = null;
 		try {
@@ -231,11 +310,19 @@ public class RandomObjectFiller {
 		return collectionObject;
 	}
 
+	/**
+	 * @param enumClass
+	 * @return
+	 */
 	public static <T> T randomEnum(Class<T> enumClass) {
 		T[] enums = enumClass.getEnumConstants();
 		return enums[RANDOM.nextInt(enums.length)];
 	}
 
+	/**
+	 * @param arrayClass
+	 * @return
+	 */
 	public static <T> T[] randomArray(Class<T> arrayClass) {
 		List<T> arrayList = new ArrayList<>();
 		for (int i = 0; i <= RANDOM.nextInt(MAX_COPIES); i++) {
