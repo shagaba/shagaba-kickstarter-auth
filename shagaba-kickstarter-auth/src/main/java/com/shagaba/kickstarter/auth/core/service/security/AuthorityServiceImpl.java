@@ -37,7 +37,6 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     public Authority create(Authority authority){
         Assert.notNull(authority);
-//        Assert.isNull(authority.getId());
         return authorityRepository.save(authority);
     }
         

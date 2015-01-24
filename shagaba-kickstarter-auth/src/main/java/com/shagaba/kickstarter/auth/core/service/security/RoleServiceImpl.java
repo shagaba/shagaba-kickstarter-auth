@@ -37,7 +37,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role create(Role role){
         Assert.notNull(role);
-//        Assert.isNull(role.getId());
         return roleRepository.save(role);
     }
         
