@@ -16,8 +16,8 @@ import com.shagaba.kickstarter.auth.common.service.mapper.MappingService;
 import com.shagaba.kickstarter.auth.core.service.profile.PersonalInformationService;
 import com.shagaba.kickstarter.auth.rest.domain.profile.PersonalInformation;
 
-@RequestMapping(value = "/personalInformations")
 @RestController
+@RequestMapping(value = "/personalInformations", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PersonalInformationController {
     
     @Resource
@@ -26,26 +26,26 @@ public class PersonalInformationController {
     @Resource
     protected PersonalInformationService personalInformationService;
     
-    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST)
     public PersonalInformation create(@Valid @RequestBody PersonalInformation personalInformation) {
         com.shagaba.kickstarter.auth.core.domain.profile.PersonalInformation corePersonalInformation = mappingService.map(personalInformation, com.shagaba.kickstarter.auth.core.domain.profile.PersonalInformation.class);
         corePersonalInformation = personalInformationService.create(corePersonalInformation);
         return mappingService.map(corePersonalInformation, PersonalInformation.class);
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET)
     public List<PersonalInformation> getAllPersonalInformations() {
         List<com.shagaba.kickstarter.auth.core.domain.profile.PersonalInformation> corePersonalInformations = personalInformationService.getAllPersonalInformations();
         return mappingService.map(corePersonalInformations, PersonalInformation.class);
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, value = "/{accountId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{accountId}")
     public PersonalInformation getPersonalInformationById(@PathVariable("accountId") String accountId) throws Exception {
         com.shagaba.kickstarter.auth.core.domain.profile.PersonalInformation corePersonalInformation = personalInformationService.getPersonalInformationByAccountId(accountId);
         return mappingService.map(corePersonalInformation, PersonalInformation.class);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.PUT)
     public PersonalInformation update(@Valid @RequestBody PersonalInformation personalInformation) throws Exception {
         com.shagaba.kickstarter.auth.core.domain.profile.PersonalInformation corePersonalInformation = personalInformationService.getPersonalInformationByAccountId(personalInformation.getAccountId());
         mappingService.map(personalInformation, corePersonalInformation);
@@ -53,7 +53,7 @@ public class PersonalInformationController {
         return mappingService.map(corePersonalInformation, PersonalInformation.class);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/{accountId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{accountId}")
     public void delete(@PathVariable("accountId") String accountId) {
         personalInformationService.delete(accountId);
     }
