@@ -19,7 +19,7 @@ public class PersonalInformation extends AuditingDomain {
 	}
 
 	/**
-     * @param id
+     * @param accountId
      * @param displayName
      * @param firstName
      * @param lastName

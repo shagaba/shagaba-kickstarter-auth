@@ -306,4 +306,154 @@ public class Address {
         this.isDefault = isDefault;
     }
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String
+				.format("Address {name=%s, firstName=%s, lastName=%s, companyName=%s, addressLine1=%s, addressLine2=%s, addressLine3=%s, city=%s, state=%s, county=%s, country=%s, postalCode=%s, zip=%s, phonePrimary=%s, phoneSecondary=%s, phoneFax=%s, longitude=%s, latitude=%s, isDefault=%s}",
+						name, firstName, lastName, companyName, addressLine1, addressLine2, addressLine3, city, state, county, country,
+						postalCode, zip, phonePrimary, phoneSecondary, phoneFax, longitude, latitude, isDefault);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addressLine1 == null) ? 0 : addressLine1.hashCode());
+		result = prime * result + ((addressLine2 == null) ? 0 : addressLine2.hashCode());
+		result = prime * result + ((addressLine3 == null) ? 0 : addressLine3.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((county == null) ? 0 : county.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((phoneFax == null) ? 0 : phoneFax.hashCode());
+		result = prime * result + ((phonePrimary == null) ? 0 : phonePrimary.hashCode());
+		result = prime * result + ((phoneSecondary == null) ? 0 : phoneSecondary.hashCode());
+		result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		if (addressLine1 == null) {
+			if (other.addressLine1 != null)
+				return false;
+		} else if (!addressLine1.equals(other.addressLine1))
+			return false;
+		if (addressLine2 == null) {
+			if (other.addressLine2 != null)
+				return false;
+		} else if (!addressLine2.equals(other.addressLine2))
+			return false;
+		if (addressLine3 == null) {
+			if (other.addressLine3 != null)
+				return false;
+		} else if (!addressLine3.equals(other.addressLine3))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (companyName == null) {
+			if (other.companyName != null)
+				return false;
+		} else if (!companyName.equals(other.companyName))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (county == null) {
+			if (other.county != null)
+				return false;
+		} else if (!county.equals(other.county))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (isDefault == null) {
+			if (other.isDefault != null)
+				return false;
+		} else if (!isDefault.equals(other.isDefault))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!latitude.equals(other.latitude))
+			return false;
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!longitude.equals(other.longitude))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (phoneFax == null) {
+			if (other.phoneFax != null)
+				return false;
+		} else if (!phoneFax.equals(other.phoneFax))
+			return false;
+		if (phonePrimary == null) {
+			if (other.phonePrimary != null)
+				return false;
+		} else if (!phonePrimary.equals(other.phonePrimary))
+			return false;
+		if (phoneSecondary == null) {
+			if (other.phoneSecondary != null)
+				return false;
+		} else if (!phoneSecondary.equals(other.phoneSecondary))
+			return false;
+		if (postalCode == null) {
+			if (other.postalCode != null)
+				return false;
+		} else if (!postalCode.equals(other.postalCode))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		if (zip == null) {
+			if (other.zip != null)
+				return false;
+		} else if (!zip.equals(other.zip))
+			return false;
+		return true;
+	}
+
 }

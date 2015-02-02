@@ -62,14 +62,14 @@ public class PersonalInformation {
     protected String company;
 
     /**
-     * @return the accountId
+     * @return the id
      */
     public String getAccountId() {
         return accountId;
     }
 
     /**
-     * @param accountId the accountId to set
+     * @param id the id to set
      */
     public void setAccountId(String accountId) {
         this.accountId = accountId;
@@ -354,5 +354,164 @@ public class PersonalInformation {
     public void setCompany(String company) {
         this.company = company;
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String
+				.format("PersonalInformation {id=%s, displayName=%s, namePrefix=%s, firstName=%s, middleName=%s, lastName=%s, nameSuffix=%s, gender=%s, locale=%s, timezone=%s, dateOfBirth=%s, maritalStatus=%s, addresses=%s, phones=%s, avatar=%s, theme=%s, occupation=%s, jobTitle=%s, interests=%s, hobbies=%s, company=%s}",
+						accountId, displayName, namePrefix, firstName, middleName, lastName, nameSuffix, gender, locale, timezone,
+						dateOfBirth, maritalStatus, addresses, phones, avatar, theme, occupation, jobTitle, interests, hobbies, company);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountId == null) ? 0 : accountId.hashCode());
+		result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
+		result = prime * result + ((avatar == null) ? 0 : avatar.hashCode());
+		result = prime * result + ((company == null) ? 0 : company.hashCode());
+		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+		result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((hobbies == null) ? 0 : hobbies.hashCode());
+		result = prime * result + ((interests == null) ? 0 : interests.hashCode());
+		result = prime * result + ((jobTitle == null) ? 0 : jobTitle.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((maritalStatus == null) ? 0 : maritalStatus.hashCode());
+		result = prime * result + ((middleName == null) ? 0 : middleName.hashCode());
+		result = prime * result + ((namePrefix == null) ? 0 : namePrefix.hashCode());
+		result = prime * result + ((nameSuffix == null) ? 0 : nameSuffix.hashCode());
+		result = prime * result + ((occupation == null) ? 0 : occupation.hashCode());
+		result = prime * result + ((phones == null) ? 0 : phones.hashCode());
+		result = prime * result + ((theme == null) ? 0 : theme.hashCode());
+		result = prime * result + ((timezone == null) ? 0 : timezone.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PersonalInformation other = (PersonalInformation) obj;
+		if (accountId == null) {
+			if (other.accountId != null)
+				return false;
+		} else if (!accountId.equals(other.accountId))
+			return false;
+		if (addresses == null) {
+			if (other.addresses != null)
+				return false;
+		} else if (!addresses.equals(other.addresses))
+			return false;
+		if (avatar == null) {
+			if (other.avatar != null)
+				return false;
+		} else if (!avatar.equals(other.avatar))
+			return false;
+		if (company == null) {
+			if (other.company != null)
+				return false;
+		} else if (!company.equals(other.company))
+			return false;
+		if (dateOfBirth == null) {
+			if (other.dateOfBirth != null)
+				return false;
+		} else if (!dateOfBirth.equals(other.dateOfBirth))
+			return false;
+		if (displayName == null) {
+			if (other.displayName != null)
+				return false;
+		} else if (!displayName.equals(other.displayName))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (gender != other.gender)
+			return false;
+		if (hobbies == null) {
+			if (other.hobbies != null)
+				return false;
+		} else if (!hobbies.equals(other.hobbies))
+			return false;
+		if (interests == null) {
+			if (other.interests != null)
+				return false;
+		} else if (!interests.equals(other.interests))
+			return false;
+		if (jobTitle == null) {
+			if (other.jobTitle != null)
+				return false;
+		} else if (!jobTitle.equals(other.jobTitle))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (locale == null) {
+			if (other.locale != null)
+				return false;
+		} else if (!locale.equals(other.locale))
+			return false;
+		if (maritalStatus == null) {
+			if (other.maritalStatus != null)
+				return false;
+		} else if (!maritalStatus.equals(other.maritalStatus))
+			return false;
+		if (middleName == null) {
+			if (other.middleName != null)
+				return false;
+		} else if (!middleName.equals(other.middleName))
+			return false;
+		if (namePrefix == null) {
+			if (other.namePrefix != null)
+				return false;
+		} else if (!namePrefix.equals(other.namePrefix))
+			return false;
+		if (nameSuffix == null) {
+			if (other.nameSuffix != null)
+				return false;
+		} else if (!nameSuffix.equals(other.nameSuffix))
+			return false;
+		if (occupation == null) {
+			if (other.occupation != null)
+				return false;
+		} else if (!occupation.equals(other.occupation))
+			return false;
+		if (phones == null) {
+			if (other.phones != null)
+				return false;
+		} else if (!phones.equals(other.phones))
+			return false;
+		if (theme == null) {
+			if (other.theme != null)
+				return false;
+		} else if (!theme.equals(other.theme))
+			return false;
+		if (timezone == null) {
+			if (other.timezone != null)
+				return false;
+		} else if (!timezone.equals(other.timezone))
+			return false;
+		return true;
+	}
 
 }
