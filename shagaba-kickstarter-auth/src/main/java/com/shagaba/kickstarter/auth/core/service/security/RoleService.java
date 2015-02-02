@@ -2,8 +2,11 @@ package com.shagaba.kickstarter.auth.core.service.security;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.shagaba.kickstarter.auth.core.domain.security.Role;
 
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ADMIN_ROLE_SERVICE')")
 public interface RoleService {
 
     public Role getRoleById(String id);

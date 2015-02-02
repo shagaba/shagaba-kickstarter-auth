@@ -2,8 +2,7 @@ package com.shagaba.kickstarter.auth.core.service.security;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -14,7 +13,7 @@ import com.shagaba.kickstarter.auth.core.repository.security.AuthorityRepository
 @Service
 public class AuthorityServiceImpl implements AuthorityService {
     
-    @Resource
+    @Autowired
     protected AuthorityRepository authorityRepository;
     
     @Override
