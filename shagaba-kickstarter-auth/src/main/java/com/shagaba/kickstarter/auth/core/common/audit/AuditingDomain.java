@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Version;
 
 import com.shagaba.kickstarter.auth.core.common.domain.AbstractDomain;
 
-public class AuditingDomain extends AbstractDomain {
+public abstract class AuditingDomain extends AbstractDomain {
 
     @Version
     protected Long version;
