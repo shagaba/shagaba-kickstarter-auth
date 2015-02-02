@@ -2,9 +2,9 @@ package com.shagaba.kickstarter.auth.rest.controller.security;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +20,10 @@ import com.shagaba.kickstarter.auth.rest.domain.security.Authority;
 @RequestMapping(value = "/security/authorities", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthorityController {
     
-    @Resource
+	@Autowired
     protected AuthorityService authorityService;
 
-    @Resource
+	@Autowired
     protected MappingService mappingService;
 
     @RequestMapping(method = RequestMethod.POST)
@@ -47,7 +47,8 @@ public class AuthorityController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public Authority update(@Valid @RequestBody Authority authority) {
-        com.shagaba.kickstarter.auth.core.domain.security.Authority coreAuthority = mappingService.map(authority, com.shagaba.kickstarter.auth.core.domain.security.Authority.class);
+        com.shagaba.kickstarter.auth.core.domain.security.Authority coreAuthority =  authorityService.getAuthorityById(authority.getId());
+        mappingService.map(authority, coreAuthority);
         coreAuthority = authorityService.update(coreAuthority);
         return mappingService.map(coreAuthority, Authority.class);
     }

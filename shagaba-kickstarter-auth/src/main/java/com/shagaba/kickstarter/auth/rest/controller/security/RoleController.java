@@ -2,9 +2,9 @@ package com.shagaba.kickstarter.auth.rest.controller.security;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +20,10 @@ import com.shagaba.kickstarter.auth.rest.domain.security.Role;
 @RequestMapping(value = "/security/roles", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RoleController {
     
-    @Resource
+    @Autowired
     protected RoleService roleService;
 
-    @Resource
+    @Autowired
     protected MappingService mappingService;
 
     @RequestMapping(method = RequestMethod.POST)
@@ -47,7 +47,8 @@ public class RoleController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public Role update(@Valid @RequestBody Role role) {
-        com.shagaba.kickstarter.auth.core.domain.security.Role coreRole = mappingService.map(role, com.shagaba.kickstarter.auth.core.domain.security.Role.class);
+        com.shagaba.kickstarter.auth.core.domain.security.Role coreRole = roleService.getRoleById(role.getId());
+        mappingService.map(role, coreRole);
         coreRole = roleService.update(coreRole);
         return mappingService.map(coreRole, Role.class);
     }

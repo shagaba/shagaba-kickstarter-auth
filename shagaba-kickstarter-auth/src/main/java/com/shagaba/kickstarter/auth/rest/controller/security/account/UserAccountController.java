@@ -2,9 +2,9 @@ package com.shagaba.kickstarter.auth.rest.controller.security.account;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +20,10 @@ import com.shagaba.kickstarter.auth.rest.domain.security.account.UserAccount;
 @RequestMapping(value = "/security/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserAccountController {
     
-    @Resource
+    @Autowired
     protected UserAccountService userAccountService;
 
-    @Resource
+    @Autowired
     protected MappingService mappingService;
 
     @RequestMapping(method = RequestMethod.POST)
@@ -47,7 +47,8 @@ public class UserAccountController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public UserAccount update(@Valid @RequestBody UserAccount userAccount) {
-        com.shagaba.kickstarter.auth.core.domain.security.account.UserAccount coreUserAccount = mappingService.map(userAccount, com.shagaba.kickstarter.auth.core.domain.security.account.UserAccount.class);
+        com.shagaba.kickstarter.auth.core.domain.security.account.UserAccount coreUserAccount = userAccountService.getUserAccountByAccountId(userAccount.getId());
+        mappingService.map(userAccount, coreUserAccount);
         coreUserAccount = userAccountService.update(coreUserAccount);
         return mappingService.map(coreUserAccount, UserAccount.class);
     }

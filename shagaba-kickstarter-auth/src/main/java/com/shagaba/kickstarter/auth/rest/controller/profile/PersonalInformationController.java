@@ -2,9 +2,9 @@ package com.shagaba.kickstarter.auth.rest.controller.profile;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +20,10 @@ import com.shagaba.kickstarter.auth.rest.domain.profile.PersonalInformation;
 @RequestMapping(value = "/personalInformations", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PersonalInformationController {
     
-    @Resource
+    @Autowired
     protected MappingService mappingService;
 
-    @Resource
+    @Autowired
     protected PersonalInformationService personalInformationService;
     
     @RequestMapping(method = RequestMethod.POST)
@@ -39,8 +39,8 @@ public class PersonalInformationController {
         return mappingService.map(corePersonalInformations, PersonalInformation.class);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{accountId}")
-    public PersonalInformation getPersonalInformationById(@PathVariable("accountId") String accountId) throws Exception {
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public PersonalInformation getPersonalInformationById(@PathVariable("id") String accountId) throws Exception {
         com.shagaba.kickstarter.auth.core.domain.profile.PersonalInformation corePersonalInformation = personalInformationService.getPersonalInformationByAccountId(accountId);
         return mappingService.map(corePersonalInformation, PersonalInformation.class);
     }
@@ -53,8 +53,8 @@ public class PersonalInformationController {
         return mappingService.map(corePersonalInformation, PersonalInformation.class);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{accountId}")
-    public void delete(@PathVariable("accountId") String accountId) {
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void delete(@PathVariable("id") String accountId) {
         personalInformationService.delete(accountId);
     }
 
