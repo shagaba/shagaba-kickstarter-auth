@@ -29,17 +29,16 @@ public abstract class AbstractRepositoryTest<T, ID extends Serializable> {
 	@Autowired
 	protected AbstractEntityGenerator<T, ID> entityGenerator;
 
-	protected List<T> all;
-
+	protected List<T> tstEntities;
+	
 	@Before
 	public void beforeEach() {
-		repository.deleteAll();
-		all = (List<T>) repository.save(Arrays.asList(entityGenerator.generate("TEST"), entityGenerator.generate("TEST"), entityGenerator.generate("TEST")));
+		tstEntities = (List<T>) repository.save(Arrays.asList(entityGenerator.generate("TEST"), entityGenerator.generate("TEST"), entityGenerator.generate("TEST")));
 	}
 
 	@After
 	public void afterEach() {
-		repository.deleteAll();
+		repository.delete(tstEntities);
 	}
 
 	@Test
@@ -69,7 +68,7 @@ public abstract class AbstractRepositoryTest<T, ID extends Serializable> {
 
 	@Test
 	public void updateSavedEntity() {
-		ID id = entityGenerator.getId(all.get(0));
+		ID id = entityGenerator.getId(tstEntities.get(0));
 		// READ - findOne
 		T got = repository.findOne(id);
 		// UPDATE - save
@@ -77,12 +76,12 @@ public abstract class AbstractRepositoryTest<T, ID extends Serializable> {
 		T updated = repository.save(got);
 		Assert.assertNotNull(updated);
 		Assert.assertEquals(got, updated);
-		Assert.assertNotEquals(all.get(0), updated);
+		Assert.assertNotEquals(tstEntities.get(0), updated);
 	}
 
 	@Test
 	public void deleteSavedEntity() {
-		ID id = entityGenerator.getId(all.get(1));
+		ID id = entityGenerator.getId(tstEntities.get(1));
 		boolean isExists = repository.exists(id);
 		Assert.assertTrue(isExists);
 		// DELETE -
@@ -98,8 +97,8 @@ public abstract class AbstractRepositoryTest<T, ID extends Serializable> {
 	@Test
 	public void findAll() throws Exception {
 		List<T> result = (List<T>) repository.findAll();
-		Assert.assertThat(result.size(), Matchers.is(all.size()));
-		Assert.assertThat(result.containsAll(all), Matchers.is(true));
+		Assert.assertThat(result.size(), Matchers.greaterThan(tstEntities.size()));
+		Assert.assertThat(result, Matchers.hasItems(tstEntities.get(0), tstEntities.get(1), tstEntities.get(2)));
 	}
 	
 }

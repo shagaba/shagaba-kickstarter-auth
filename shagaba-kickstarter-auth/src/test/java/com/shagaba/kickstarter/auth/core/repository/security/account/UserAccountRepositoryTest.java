@@ -11,7 +11,7 @@ public class UserAccountRepositoryTest extends AbstractRepositoryTest<UserAccoun
 	@Test
 	public void getUserAccountByUsername() {
 		UserAccountRepository userAccountRepository = (UserAccountRepository) repository;
-		UserAccount entity = all.get(2);
+		UserAccount entity = tstEntities.get(2);
 		UserAccount got = userAccountRepository.getUserAccountByUsername(entity.getUsername());
 		Assert.assertNotNull(got);
 		Assert.assertEquals(entity, got);
