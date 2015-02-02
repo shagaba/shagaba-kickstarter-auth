@@ -14,7 +14,7 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@ComponentScan(basePackages = "com.shagaba.kickstarter.auth.client")
+@ComponentScan(basePackages = { "com.shagaba.kickstarter.auth" })
 public class HttpConfig {
     
     protected int readTimeout = 2000;

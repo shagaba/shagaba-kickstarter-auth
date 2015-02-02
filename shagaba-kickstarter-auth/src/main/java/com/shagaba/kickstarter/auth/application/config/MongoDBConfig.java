@@ -23,7 +23,7 @@ import com.mongodb.MongoClientURI;
 @Configuration
 @PropertySource("classpath:mongodb.properties")
 @EnableMongoAuditing(auditorAwareRef = "customAuditorAware")
-@EnableMongoRepositories(basePackages = "com.shagaba.kickstarter.auth.core.repository")
+@EnableMongoRepositories(basePackages = { "com.shagaba.kickstarter.auth.core.repository" })
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
     @Value("${mongodb.db}")
