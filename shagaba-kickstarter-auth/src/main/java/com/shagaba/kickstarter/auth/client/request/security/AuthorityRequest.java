@@ -2,21 +2,25 @@ package com.shagaba.kickstarter.auth.client.request.security;
 
 import java.util.List;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import com.shagaba.kickstarter.auth.client.common.CRUDRestClient;
+import com.shagaba.kickstarter.auth.client.common.RestClient;
 import com.shagaba.kickstarter.auth.client.common.RestComponents;
 import com.shagaba.kickstarter.auth.rest.domain.security.Authority;
 
-public class AuthorityRequest extends CRUDRestClient<Authority> {
+public class AuthorityRequest extends RestClient {
     public static final String REQUEST_MAPPING = "/security/authorities";
-    
 
     /**
      * @param restComponents
      */
     public AuthorityRequest(RestComponents restComponents) {
-        super(restComponents, REQUEST_MAPPING);
+        super(restComponents);
     }
 
     /**
@@ -24,7 +28,11 @@ public class AuthorityRequest extends CRUDRestClient<Authority> {
      * @return
      */
     public Authority create(Authority authority) {
-        ResponseEntity<Authority> responseEntity = super.createEntity(authority);
+        UriComponents uriComponents = UriComponentsBuilder.fromUri(restComponents.getUri()).path(REQUEST_MAPPING).build();
+        HttpEntity<Authority> requestEntity = new HttpEntity<Authority>(authority, restComponents.getHttpHeaders());
+        ResponseEntity<Authority> responseEntity = restComponents.getRestOperations().exchange(uriComponents.toUriString(), HttpMethod.POST, requestEntity, Authority.class);
+
+        super.updateHeaderToken(responseEntity);
         return responseEntity.getBody();
     }
 
@@ -32,7 +40,11 @@ public class AuthorityRequest extends CRUDRestClient<Authority> {
      * @return
      */
     public List<Authority> getAllAuthorities() {
-        ResponseEntity<List<Authority>> responseEntity = super.getAllEntitys();
+        UriComponents uriComponents = UriComponentsBuilder.fromUri(restComponents.getUri()).path(REQUEST_MAPPING).build();
+        HttpEntity<Authority> requestEntity = new HttpEntity<Authority>(restComponents.getHttpHeaders());
+        ResponseEntity<List<Authority>> responseEntity = restComponents.getRestOperations().exchange(uriComponents.toUriString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<List<Authority>>() { });
+
+        super.updateHeaderToken(responseEntity);
         return responseEntity.getBody();
     }
 
@@ -41,7 +53,11 @@ public class AuthorityRequest extends CRUDRestClient<Authority> {
      * @return
      */
     public Authority getAuthorityById(String id) {
-        ResponseEntity<Authority> responseEntity = super.getEntityById(id);
+        HttpEntity<Object> requestEntity = new HttpEntity<Object>(restComponents.getHttpHeaders());
+        UriComponents uriComponents = UriComponentsBuilder.fromUri(restComponents.getUri()).path(REQUEST_MAPPING).path("/").path(id).build();
+        ResponseEntity<Authority> responseEntity = restComponents.getRestOperations().exchange(uriComponents.toUriString(), HttpMethod.GET, requestEntity, Authority.class);
+
+        super.updateHeaderToken(responseEntity);
         return responseEntity.getBody();
     }
 
@@ -50,7 +66,11 @@ public class AuthorityRequest extends CRUDRestClient<Authority> {
      * @return
      */
     public Authority update(Authority authority) {
-        ResponseEntity<Authority> responseEntity = super.updateEntity(authority);
+        HttpEntity<Authority> requestEntity = new HttpEntity<Authority>(authority, restComponents.getHttpHeaders());
+        UriComponents uriComponents = UriComponentsBuilder.fromUri(restComponents.getUri()).path(REQUEST_MAPPING).build();
+        ResponseEntity<Authority> responseEntity = restComponents.getRestOperations().exchange(uriComponents.toUriString(), HttpMethod.PUT, requestEntity, Authority.class);
+
+        super.updateHeaderToken(responseEntity);
         return responseEntity.getBody();
     }
 
@@ -58,7 +78,11 @@ public class AuthorityRequest extends CRUDRestClient<Authority> {
      * @param id
      */
     public void delete(String id) {
-        ResponseEntity<Authority> responseEntity = super.deleteEntity(id);
+        HttpEntity<Object> requestEntity = new HttpEntity<Object>(restComponents.getHttpHeaders());
+        UriComponents uriComponents = UriComponentsBuilder.fromUri(restComponents.getUri()).path(REQUEST_MAPPING).path("/").path(id).build();
+        ResponseEntity<Authority> responseEntity = restComponents.getRestOperations().exchange(uriComponents.toUriString(), HttpMethod.DELETE, requestEntity, Authority.class);
+
+        super.updateHeaderToken(responseEntity);
     }
 
 }

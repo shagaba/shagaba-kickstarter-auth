@@ -1,6 +1,10 @@
 package com.shagaba.kickstarter.auth.client.common;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
+
+import com.shagaba.kickstarter.auth.client.request.security.AuthenticationRequest;
+import com.shagaba.kickstarter.auth.client.request.security.AuthorityRequest;
 
 
 public class RestClient {
@@ -17,10 +21,32 @@ public class RestClient {
     }
 
     /**
+     * @param responseEntity
+     */
+    protected void updateHeaderToken(ResponseEntity<?> responseEntity) {
+        String authToken = responseEntity.getHeaders().getFirst("X-Auth-Token");
+        restComponents.getHttpHeaders().set("X-Auth-Token", authToken);
+    }
+
+    /**
      * @return the restComponents
      */
     public RestComponents getRestComponents() {
         return restComponents;
+    }
+    
+    /**
+     * @return the authenticationRequest
+     */
+    public AuthenticationRequest authenticationRequest() {
+        return new AuthenticationRequest(restComponents);
+    }
+    
+    /**
+     * @return the authorityRequest
+     */
+    public AuthorityRequest authorityRequest() {
+        return new AuthorityRequest(restComponents);
     }
 
 }

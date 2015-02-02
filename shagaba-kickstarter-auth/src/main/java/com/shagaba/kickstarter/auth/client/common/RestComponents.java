@@ -2,8 +2,7 @@ package com.shagaba.kickstarter.auth.client.common;
 
 import java.net.URI;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
@@ -19,12 +18,12 @@ public class RestComponents {
     
     protected String host = "localhost";
     
-    protected int port = 8765;
+    protected int port = 80;
     
-    @Resource
+    @Autowired
     protected HttpHeaders httpHeaders;
     
-    @Resource
+    @Autowired
     protected RestOperations restOperations;
     
     public URI getUri(){
