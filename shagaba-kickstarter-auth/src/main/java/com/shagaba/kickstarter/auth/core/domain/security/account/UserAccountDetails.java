@@ -11,7 +11,7 @@ public class UserAccountDetails extends org.springframework.security.core.userde
 	protected String salt;
 
 	/**
-	 * @param accountId
+	 * @param id
 	 * @param username
 	 * @param password
 	 * @param salt
@@ -23,7 +23,7 @@ public class UserAccountDetails extends org.springframework.security.core.userde
 	}
 
 	/**
-	 * @param accountId
+	 * @param id
 	 * @param username
 	 * @param password
 	 * @param salt
@@ -41,7 +41,7 @@ public class UserAccountDetails extends org.springframework.security.core.userde
 	}
 
 	/**
-	 * @return the accountId
+	 * @return the id
 	 */
 	public String getAccountId() {
 		return accountId;

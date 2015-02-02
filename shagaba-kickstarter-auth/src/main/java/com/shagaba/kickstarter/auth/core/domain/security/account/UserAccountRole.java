@@ -55,6 +55,14 @@ public class UserAccountRole {
 		this.experationTime = experationTime;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String.format("UserAccountRole {roleId=%s, experationTime=%s}", roleId, experationTime);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

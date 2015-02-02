@@ -37,7 +37,7 @@ public class AccountAuthenticationStatus extends AuditingDomain {
     }
 
     /**
-     * @param accountId
+     * @param id
      * @param isRegistered
      * @param isEmailVerified
      */
@@ -49,7 +49,7 @@ public class AccountAuthenticationStatus extends AuditingDomain {
     }
 
     /**
-     * @param accountId
+     * @param id
      * @param isRegistered
      * @param isEmailVerified
      * @param accountToken
@@ -73,14 +73,14 @@ public class AccountAuthenticationStatus extends AuditingDomain {
     }
 
     /**
-     * @return the accountId
+     * @return the id
      */
     public String getAccountId() {
         return accountId;
     }
 
     /**
-     * @param accountId the accountId to set
+     * @param id the id to set
      */
     public void setAccountId(String accountId) {
         this.accountId = accountId;

@@ -33,7 +33,7 @@ public class UserAccount extends AuditingDomain {
 	}
 
 	/**
-	 * @param accountId
+	 * @param id
 	 * @param username
 	 * @param password
 	 * @param emailAddress
@@ -54,15 +54,15 @@ public class UserAccount extends AuditingDomain {
 	}
 
 	/**
-	 * @return the accountId
+	 * @return the id
 	 */
 	public String getAccountId() {
 		return accountId;
 	}
 
 	/**
-	 * @param accountId
-	 *            the accountId to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
@@ -161,12 +161,26 @@ public class UserAccount extends AuditingDomain {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String
+				.format("UserAccount {id=%s, username=%s, password=%s, emailAddress=%s, challengeQuestions=%s, salt=%s, roles=%s, version=%s, createdBy=%s, createdTime=%s, lastModifiedBy=%s, lastModifiedTime=%s}",
+						accountId, username, password, emailAddress, challengeQuestions, salt, roles, version, createdBy, createdTime,
+						lastModifiedBy, lastModifiedTime);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((accountId == null) ? 0 : accountId.hashCode());
 		result = prime * result + ((challengeQuestions == null) ? 0 : challengeQuestions.hashCode());
 		result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -190,6 +204,11 @@ public class UserAccount extends AuditingDomain {
 		if (getClass() != obj.getClass())
 			return false;
 		UserAccount other = (UserAccount) obj;
+		if (accountId == null) {
+			if (other.accountId != null)
+				return false;
+		} else if (!accountId.equals(other.accountId))
+			return false;
 		if (challengeQuestions == null) {
 			if (other.challengeQuestions != null)
 				return false;

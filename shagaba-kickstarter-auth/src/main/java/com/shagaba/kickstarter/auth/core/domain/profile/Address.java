@@ -307,6 +307,17 @@ public class Address {
 	}
 
 	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String
+				.format("Address {name=%s, firstName=%s, lastName=%s, companyName=%s, addressLine1=%s, addressLine2=%s, addressLine3=%s, city=%s, state=%s, county=%s, country=%s, postalCode=%s, zip=%s, phonePrimary=%s, phoneSecondary=%s, phoneFax=%s, longitude=%s, latitude=%s, isDefault=%s}",
+						name, firstName, lastName, companyName, addressLine1, addressLine2, addressLine3, city, state, county, country,
+						postalCode, zip, phonePrimary, phoneSecondary, phoneFax, longitude, latitude, isDefault);
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

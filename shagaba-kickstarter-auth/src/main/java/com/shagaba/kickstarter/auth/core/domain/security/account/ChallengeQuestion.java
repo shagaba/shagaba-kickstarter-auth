@@ -53,6 +53,14 @@ public class ChallengeQuestion {
 		this.answer = answer;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String.format("ChallengeQuestion {question=%s, answer=%s}", question, answer);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

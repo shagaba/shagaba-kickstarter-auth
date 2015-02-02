@@ -51,6 +51,14 @@ public class Phone {
     }
 
 	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String.format("Phone {name=%s, number=%s, extension=%s}", name, number, extension);
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

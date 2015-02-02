@@ -11,6 +11,27 @@ import com.shagaba.kickstarter.auth.core.common.audit.AuditingDomain;
 @Document
 public class PersonalInformation extends AuditingDomain {
 
+    /**
+	 * 
+	 */
+	public PersonalInformation() {
+        super();
+	}
+
+	/**
+     * @param id
+     * @param displayName
+     * @param firstName
+     * @param lastName
+     */
+    public PersonalInformation(String accountId, String displayName, String firstName, String lastName) {
+        super();
+        this.accountId = accountId;
+        this.displayName = displayName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Id
     protected String accountId;
 
@@ -55,14 +76,14 @@ public class PersonalInformation extends AuditingDomain {
     protected String company;
 
     /**
-     * @return the accountId
+     * @return the id
      */
     public String getAccountId() {
         return accountId;
     }
 
     /**
-     * @param accountId the accountId to set
+     * @param id the id to set
      */
     public void setAccountId(String accountId) {
         this.accountId = accountId;
@@ -349,12 +370,25 @@ public class PersonalInformation extends AuditingDomain {
     }
 
 	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String
+				.format("PersonalInformation {id=%s, displayName=%s, namePrefix=%s, firstName=%s, middleName=%s, lastName=%s, nameSuffix=%s, gender=%s, locale=%s, timezone=%s, dateOfBirth=%s, maritalStatus=%s, addresses=%s, phones=%s, avatar=%s, theme=%s, occupation=%s, jobTitle=%s, interests=%s, hobbies=%s, company=%s, version=%s, createdBy=%s, createdTime=%s, lastModifiedBy=%s, lastModifiedTime=%s}",
+						accountId, displayName, namePrefix, firstName, middleName, lastName, nameSuffix, gender, locale, timezone,
+						dateOfBirth, maritalStatus, addresses, phones, avatar, theme, occupation, jobTitle, interests, hobbies, company,
+						version, createdBy, createdTime, lastModifiedBy, lastModifiedTime);
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((accountId == null) ? 0 : accountId.hashCode());
 		result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
 		result = prime * result + ((avatar == null) ? 0 : avatar.hashCode());
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
@@ -390,6 +424,11 @@ public class PersonalInformation extends AuditingDomain {
 		if (getClass() != obj.getClass())
 			return false;
 		PersonalInformation other = (PersonalInformation) obj;
+		if (accountId == null) {
+			if (other.accountId != null)
+				return false;
+		} else if (!accountId.equals(other.accountId))
+			return false;
 		if (addresses == null) {
 			if (other.addresses != null)
 				return false;
