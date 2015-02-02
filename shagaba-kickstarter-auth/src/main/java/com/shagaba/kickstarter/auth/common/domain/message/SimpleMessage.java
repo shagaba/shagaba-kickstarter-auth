@@ -4,13 +4,19 @@ import java.util.Date;
 
 public class SimpleMessage implements Message {
     
-    protected MessageType messageType;
+	protected MessageType messageType;
     
     protected int code;
 
     protected String message;
     
     protected Date timestamp;
+
+    /**
+	 * 
+	 */
+	public SimpleMessage() {
+	}
 
     /**
      * @param messageType
@@ -103,5 +109,56 @@ public class SimpleMessage implements Message {
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String.format("SimpleMessage {messageType=%s, code=%s, message=%s, timestamp=%s}", messageType, code, message, timestamp);
+	}
     
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + code;
+		result = prime * result + ((message == null) ? 0 : message.hashCode());
+		result = prime * result + ((messageType == null) ? 0 : messageType.hashCode());
+		result = prime * result + ((timestamp == null) ? 0 : timestamp.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SimpleMessage other = (SimpleMessage) obj;
+		if (code != other.code)
+			return false;
+		if (message == null) {
+			if (other.message != null)
+				return false;
+		} else if (!message.equals(other.message))
+			return false;
+		if (messageType != other.messageType)
+			return false;
+		if (timestamp == null) {
+			if (other.timestamp != null)
+				return false;
+		} else if (!timestamp.equals(other.timestamp))
+			return false;
+		return true;
+	}
+
 }
