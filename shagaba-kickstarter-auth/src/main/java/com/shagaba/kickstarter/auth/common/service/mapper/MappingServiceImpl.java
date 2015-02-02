@@ -4,9 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -15,7 +14,7 @@ import com.google.common.collect.Sets;
 @Service
 public class MappingServiceImpl implements MappingService {
 
-    @Resource
+    @Autowired
     protected DozerBeanMapper dozerBeanMapper;
 
     @Override
@@ -36,7 +35,7 @@ public class MappingServiceImpl implements MappingService {
 	public <O, T> List<T> map(List<O> objects, Class<T> targetElementClass) {
         if (objects == null)
             return null;
-        List<T> targets = Lists.newLinkedList();
+        List<T> targets = Lists.newArrayList();
         return map(objects, targets, targetElementClass);
     }
     
