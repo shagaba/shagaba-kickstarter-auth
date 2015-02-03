@@ -9,47 +9,13 @@ public class SecurePasswordUtils {
 
 	public static final int MIN_CHARACTERS_ALLOWED = 6;
 
-	public static final String NUMERIC = "123467890";
-	public static final String SPECIAL_CHAR = "!@#%&*-+=";
-	public static final String ALPHABETIC_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
-	public static final String ALPHABETIC_UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	public static final String ALPHANUMERIC_NUMERIC = "2346789";
-	public static final String ALPHANUMERIC_ALPHABETIC_LOWER_CASE = "abcdefghjkmnpqrstuvwxy";
-	public static final String ALPHANUMERIC_ALPHABETIC_UPPER_CASE = "ABCDEFGHJLMNPQRSTUVWXY";
-
 	/**
 	 * @param requiredLength
+	 * @param passwordTypeEnum
 	 * @return
 	 */
-	public static String generateNumericPasswoed(int requiredLength) {
-		return generatePasswoed(requiredLength, NUMERIC);
-	}
-
-	/**
-	 * @param requiredLength
-	 * @return
-	 */
-	public static String generateAlphabeticPasswoed(int requiredLength) {
-		String[] sequence = { ALPHABETIC_LOWER_CASE, ALPHABETIC_UPPER_CASE };
-		return generatePasswoed(requiredLength, sequence);
-	}
-
-	/**
-	 * @param requiredLength
-	 * @return
-	 */
-	public static String generateAlphanumericPasswoed(int requiredLength) {
-		String[] sequence = { ALPHANUMERIC_NUMERIC, ALPHANUMERIC_ALPHABETIC_LOWER_CASE, ALPHANUMERIC_ALPHABETIC_UPPER_CASE };
-		return generatePasswoed(requiredLength, sequence);
-	}
-
-	/**
-	 * @param requiredLength
-	 * @return
-	 */
-	public static String generateAlphanumericWithSpechialCharacterPasswoed(int requiredLength) {
-		String[] sequence = { ALPHANUMERIC_NUMERIC, ALPHANUMERIC_ALPHABETIC_LOWER_CASE, ALPHANUMERIC_ALPHABETIC_UPPER_CASE, SPECIAL_CHAR };
-		return generatePasswoed(requiredLength, sequence);
+	public static String generatePasswoed(int requiredLength, PasswordTypeEnum passwordTypeEnum) {
+		return generatePasswoed(requiredLength, passwordTypeEnum.getSequence());
 	}
 
 	/**
@@ -69,26 +35,30 @@ public class SecurePasswordUtils {
 	 * @return
 	 */
 	public static String generatePasswoed(int requiredLength, Random random, String... sequence) {
+		String[] passwordSequence = sequence;
+		if (passwordSequence == null || passwordSequence.length == 0) {
+			passwordSequence = PasswordTypeEnum.ALPHANUMERIC_SYMBOL.getSequence();
+		}
 		if (requiredLength < 0) {
 			throw new IllegalArgumentException("Requested random Character resource length " + requiredLength + " is less than 0.");
 		} else if (requiredLength < MIN_CHARACTERS_ALLOWED) {
 			throw new IllegalArgumentException("Requested random Character resource length " + requiredLength + " is less than "
 					+ MIN_CHARACTERS_ALLOWED + " (minimum Character allowed).");
-		} else if (requiredLength < sequence.length) {
+		} else if (requiredLength < passwordSequence.length) {
 			throw new IllegalArgumentException("Requested random Character resource length " + requiredLength + " is less than "
-					+ sequence.length + " (sequence array length).");
+					+ passwordSequence.length + " (sequence array length).");
 		}
 
 		StringBuilder sb = new StringBuilder(requiredLength);
 
-		Map<Integer, Character> index2characterMap = getStrongPasswordMap(requiredLength, random, sequence);
+		Map<Integer, Character> index2characterMap = getStrongPasswordMap(requiredLength, random, passwordSequence);
 		
 		for (int index = 0; index < requiredLength; ++index) {
 			if (index2characterMap.containsKey(index)) {
 				sb.append(index2characterMap.get(index));
 			} else {
-				int sequenceIndex = (int) Math.round(Math.floor(random.nextDouble() * sequence.length));
-				sb.append(randomCharacter(sequence[sequenceIndex].toCharArray(), random));
+				int sequenceIndex = (int) Math.round(Math.floor(random.nextDouble() * passwordSequence.length));
+				sb.append(randomCharacter(passwordSequence[sequenceIndex].toCharArray(), random));
 			}
 		}
 		return sb.toString();

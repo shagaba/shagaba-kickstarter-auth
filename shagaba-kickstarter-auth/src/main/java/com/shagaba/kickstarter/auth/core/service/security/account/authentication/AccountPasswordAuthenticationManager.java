@@ -26,7 +26,7 @@ public class AccountPasswordAuthenticationManager {
      * @return
      */
     public String generateSalt() {
-        return SecurePasswordUtils.generateAlphanumericWithSpechialCharacterPasswoed(passwordSaltLength);
+        return SecurePasswordUtils.generatePasswoed(passwordSaltLength);
     }
 
     
