@@ -5,17 +5,86 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.google.common.base.CharMatcher;
+
 public class SecurePasswordUtils {
 
 	public static final int MIN_CHARACTERS_ALLOWED = 6;
+	public static final String NUMERIC = "123467890";
+	public static final String SYMBOL = "`~!@#$%^&*()_-+={}[]\\|:;\"'<>,.?/";
+	public static final String ALPHABETIC_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
+	public static final String ALPHABETIC_UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public static final String SIMILAR_CHAR = "oO0ilI1!zZ5$K^";
+	public static final String AMBIGUOUS_SYMBOL = "{}[]()/\\'\"`~,;:.<>";
+	
+	public enum PasswordType{NUMERIC, ALPHABETIC, ALPHANUMERIC, ALPHANUMERIC_SYMBOL};
 
 	/**
 	 * @param requiredLength
-	 * @param passwordTypeEnum
+	 * @param passwordType
 	 * @return
 	 */
-	public static String generatePasswoed(int requiredLength, PasswordTypeEnum passwordTypeEnum) {
-		return generatePasswoed(requiredLength, passwordTypeEnum.getSequence());
+	public static String generatePasswoed(int requiredLength, PasswordType passwordType) {
+		return generatePasswoed(requiredLength, passwordType, true, true);
+	}
+	
+	/**
+	 * @param requiredLength
+	 * @param passwordType
+	 * @param excludeSimilarChar
+	 * @param excludeAmbiguousSymbols
+	 * @return
+	 */
+	public static String generatePasswoed(int requiredLength, PasswordType passwordType, boolean excludeSimilarChar, boolean excludeAmbiguousSymbols) {
+		String[] sequence = getSequence(passwordType);
+		sequence = filterSequence(excludeSimilarChar, excludeAmbiguousSymbols, sequence);
+		return generatePasswoed(requiredLength, sequence);
+	}
+	
+	/**
+	 * @param excludeSimilarChar
+	 * @param excludeAmbiguousSymbols
+	 * @param sequence
+	 * @return
+	 */
+	public static String[] filterSequence(boolean excludeSimilarChar, boolean excludeAmbiguousSymbols, String... sequence) {
+		if (sequence == null)
+			return null;
+		
+		String[] returnSequence = new String[sequence.length];
+		for (int i = 0; i < sequence.length; ++i) {
+			returnSequence[i] = sequence[i];
+			if (excludeSimilarChar) {
+				returnSequence[i] = CharMatcher.anyOf(SIMILAR_CHAR).removeFrom(returnSequence[i]);
+			}
+			if (excludeAmbiguousSymbols) {
+				returnSequence[i] = CharMatcher.anyOf(AMBIGUOUS_SYMBOL).removeFrom(returnSequence[i]);
+			}
+		}
+		return returnSequence;
+	}
+
+	/**
+	 * @param passwordType
+	 * @return
+	 */
+	public static String[] getSequence(PasswordType passwordType) {
+		switch (passwordType) {
+		case NUMERIC:
+			return new String[]{ NUMERIC };
+			
+		case ALPHABETIC:
+			return new String[]{ ALPHABETIC_LOWER_CASE, ALPHABETIC_UPPER_CASE };
+			
+		case ALPHANUMERIC:
+			return new String[]{ ALPHABETIC_LOWER_CASE, ALPHABETIC_UPPER_CASE, NUMERIC };
+			
+		case ALPHANUMERIC_SYMBOL:
+			return new String[]{ ALPHABETIC_LOWER_CASE, ALPHABETIC_UPPER_CASE, NUMERIC, SYMBOL };
+
+		default:
+			return new String[]{ ALPHABETIC_LOWER_CASE, ALPHABETIC_UPPER_CASE, NUMERIC, SYMBOL };
+		}
 	}
 
 	/**
@@ -37,7 +106,7 @@ public class SecurePasswordUtils {
 	public static String generatePasswoed(int requiredLength, Random random, String... sequence) {
 		String[] passwordSequence = sequence;
 		if (passwordSequence == null || passwordSequence.length == 0) {
-			passwordSequence = PasswordTypeEnum.ALPHANUMERIC_SYMBOL.getSequence();
+			passwordSequence = getSequence(PasswordType.ALPHANUMERIC_SYMBOL);
 		}
 		if (requiredLength < 0) {
 			throw new IllegalArgumentException("Requested random Character resource length " + requiredLength + " is less than 0.");
