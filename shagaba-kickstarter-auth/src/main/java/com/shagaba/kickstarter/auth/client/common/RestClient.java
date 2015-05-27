@@ -24,8 +24,7 @@ public class RestClient {
      * @param responseEntity
      */
     protected void updateHeaderToken(ResponseEntity<?> responseEntity) {
-        String authToken = responseEntity.getHeaders().getFirst("X-Auth-Token");
-        restComponents.getHttpHeaders().set("X-Auth-Token", authToken);
+    	restComponents.setHttpHeaders(responseEntity.getHeaders());
     }
 
     /**

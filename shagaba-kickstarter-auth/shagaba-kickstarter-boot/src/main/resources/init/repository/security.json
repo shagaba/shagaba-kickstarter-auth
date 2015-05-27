@@ -1,0 +1,91 @@
+[{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "ADMINISTRATOR",
+	"description": "Full access to everything."
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "SUBSCRIBER",
+	"description": "Paying Subscriber with special access."
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "MEMBER",
+	"description": "Authenticated users with limited access."
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "ANONYMOUS",
+	"description": "Base role for public, unauthenticated users."
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "ADMIN_AUTHORITY_SERVICE",
+	"description": "ADMIN_AUTHORITY_SERVICE"
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "MODERATOR_AUTHORITY_SERVICE",
+	"description": "MODERATOR_AUTHORITY_SERVICE"
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "ADMIN_ROLE_SERVICE",
+	"description": "ADMIN_ROLE_SERVICE"
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "MODERATOR_ROLE_SERVICE",
+	"description": "MODERATOR_ROLE_SERVICE"
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "ADMIN_PERSONAL_INFO_SERVICE",
+	"description": "ADMIN_PERSONAL_INFO_SERVICE"
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Authority",
+	"id": "MODERATOR_PERSONAL_INFO_SERVICE",
+	"description": "MODERATOR_PERSONAL_INFO_SERVICE"
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Role",
+	"id": "ADMINISTRATOR",
+	"description": "Full access to everything.",
+	"authorities": ["ADMINISTRATOR"]
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Role",
+	"id": "SUBSCRIBER",
+	"description": "Subscriber.",
+	"authorities": ["SUBSCRIBER"]
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Role",
+	"id": "MEMBER",
+	"description": "Member.",
+	"authorities": ["MEMBER"]
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.Role",
+	"id": "ANONYMOUS",
+	"description": "Anonymous.",
+	"authorities": ["ANONYMOUS"]
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.account.UserAccount",
+	"accountId": "ADMINISTRATOR",
+	"username": "admin",
+	"password": "$2a$10$GMPkxowiJTHPb6Gh7rzVuuAyT7EJixiuLNd87saQkUO8rwYQ01SeO",
+	"emailAddress": "admin@kickstarter.shagaba.com",
+	"salt": "5a1T",
+	"roles": [{
+		"roleId" : "ADMINISTRATOR"
+	}]
+},
+{
+	"_class": "com.shagaba.kickstarter.core.domain.security.account.authentication.AccountAuthenticationStatus",
+	"accountId": "ADMINISTRATOR",
+	"isRegistered": "true",
+	"isEmailVerified": "false"
+}]

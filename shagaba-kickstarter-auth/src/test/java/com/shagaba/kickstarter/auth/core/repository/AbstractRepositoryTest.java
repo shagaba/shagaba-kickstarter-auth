@@ -1,7 +1,7 @@
 package com.shagaba.kickstarter.auth.core.repository;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -33,18 +33,22 @@ public abstract class AbstractRepositoryTest<T, ID extends Serializable> {
 	
 	@Before
 	public void beforeEach() {
-		tstEntities = (List<T>) repository.save(Arrays.asList(entityGenerator.generate("TEST"), entityGenerator.generate("TEST"), entityGenerator.generate("TEST")));
+		tstEntities = new ArrayList<>();
+		tstEntities.add(repository.findOne((ID) "TEST1"));
+		tstEntities.add(repository.findOne((ID) "TEST2"));
 	}
 
 	@After
 	public void afterEach() {
-		repository.delete(tstEntities);
+//		repository.delete(tstEntities);
 	}
 
 	@Test
 	public void findSavedEntity() {
 		// exists
-		T entity = entityGenerator.generate("TEST");
+		T entity = tstEntities.get(0);
+//		repository.delete(tstEntities);
+
 		ID id = entityGenerator.getId(entity);
 		boolean isExists = repository.exists(id);
 		Assert.assertFalse(isExists);
@@ -98,7 +102,7 @@ public abstract class AbstractRepositoryTest<T, ID extends Serializable> {
 	public void findAll() throws Exception {
 		List<T> result = (List<T>) repository.findAll();
 		Assert.assertThat(result.size(), Matchers.greaterThan(tstEntities.size()));
-		Assert.assertThat(result, Matchers.hasItems(tstEntities.get(0), tstEntities.get(1), tstEntities.get(2)));
+		Assert.assertThat(result, Matchers.hasItems(tstEntities.get(0), tstEntities.get(1)));
 	}
 	
 }

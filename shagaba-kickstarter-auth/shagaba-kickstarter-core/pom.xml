@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.shagaba.kickstarter</groupId>
+		<artifactId>shagaba-kickstarter</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>shagaba-kickstarter-core</artifactId>
+	<packaging>pom</packaging>
+	<name>shagaba-kickstarter-core</name>
+	
+	<modules>
+		<module>shagaba-kickstarter-core-domain</module>
+		<module>shagaba-kickstarter-core-repository</module>
+		<module>shagaba-kickstarter-core-rest</module>
+		<module>shagaba-kickstarter-core-security</module>
+		<module>shagaba-kickstarter-core-service</module>
+	</modules>
+	
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>shagaba-kickstarter-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	
+</project>

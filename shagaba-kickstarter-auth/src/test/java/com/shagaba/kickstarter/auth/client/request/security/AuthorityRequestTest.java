@@ -9,13 +9,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.SpringApplicationContextLoader;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.common.collect.Lists;
+import com.shagaba.kickstarter.auth.application.MainApplication;
 import com.shagaba.kickstarter.auth.client.common.RestClient;
 import com.shagaba.kickstarter.auth.client.common.RestComponents;
-import com.shagaba.kickstarter.auth.client.config.HttpConfig;
 import com.shagaba.kickstarter.auth.common.domain.message.Message;
 import com.shagaba.kickstarter.auth.common.service.mapper.MappingService;
 import com.shagaba.kickstarter.auth.core.common.util.RandomObjectFiller;
@@ -23,7 +24,7 @@ import com.shagaba.kickstarter.auth.core.repository.security.AuthorityRepository
 import com.shagaba.kickstarter.auth.rest.domain.security.Authority;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { HttpConfig.class })
+@ContextConfiguration(classes = { MainApplication.class }, loader = SpringApplicationContextLoader.class)
 public class AuthorityRequestTest {
 	public static final String ENTITY_ID = "TEST_ID";
 

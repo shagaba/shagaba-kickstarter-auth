@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -84,38 +85,59 @@ public class RandomObjectFiller {
 				object = (T) randomSet((Class<Set>) objectClass, typeClass1);
 			} else if (Collection.class.isAssignableFrom(objectClass)) {
 				object = (T) randomCollection((Class<Collection>) objectClass, typeClass1);
+			} else if (Locale.class.isAssignableFrom(objectClass)) {
+				object = (T) Locale.ENGLISH;
 			} else if (objectClass.isArray()) {
 				object = (T) randomArray(objectClass.getComponentType());
 			} else if (objectClass.isEnum()) {
 				object = (T) randomEnum(objectClass);
 			} else {
 				object = objectClass.newInstance();
-				for (Field field : objectClass.getDeclaredFields()) {
-					if (!java.lang.reflect.Modifier.isStatic(field.getModifiers())) {
-						Class fieldType = field.getType();
-						field.setAccessible(true);
-						if (field.getGenericType() instanceof ParameterizedType) {
-							ParameterizedType paramType = (ParameterizedType) field.getGenericType();
-							Type[] typeArgs = paramType.getActualTypeArguments();
-							if (typeArgs.length == 1) {
-								if (typeArgs[0] instanceof ParameterizedType) {
-									// TODO: HANDLE NESTED PARAM TYPE
-								} else {
-									field.set(object, randomObject(fieldType, (Class<?>) typeArgs[0]));
-								}
-							} else if (typeArgs.length == 2) {
-								field.set(object, randomObject(fieldType, (Class<?>) typeArgs[0], (Class<?>) typeArgs[1]));
-							}
-						} else {
-							field.set(object, randomObject(fieldType));
+				Class clazz = objectClass;
+				while (clazz != null) {
+					for (Field field : clazz.getDeclaredFields()) {
+						Object value = randomField(field);
+						if (value != null) {
+							field.set(object, value);
 						}
 					}
-				}
+					clazz = clazz.getSuperclass();
+				} 
 			}
 		} catch (Exception ex) {
-			// LOG.error("Exception while building the random object", ex);
+			//System.out.println("Exception while building the random object " + ex.getMessage());
 		}
 		return object;
+	}
+	
+	
+	/**
+	 * @param field
+	 * @return
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	private static Object randomField(Field field) throws IllegalArgumentException, IllegalAccessException {
+		if (!java.lang.reflect.Modifier.isStatic(field.getModifiers())) {
+			Class fieldType = field.getType();
+			field.setAccessible(true);
+			if (field.getGenericType() instanceof ParameterizedType) {
+				ParameterizedType paramType = (ParameterizedType) field.getGenericType();
+				Type[] typeArgs = paramType.getActualTypeArguments();
+				if (typeArgs.length == 1) {
+					if (typeArgs[0] instanceof ParameterizedType) {
+						// TODO: HANDLE NESTED PARAM TYPE
+					} else {
+						return randomObject(fieldType, (Class<?>) typeArgs[0]);
+					}
+				} else if (typeArgs.length == 2) {
+					return randomObject(fieldType, (Class<?>) typeArgs[0], (Class<?>) typeArgs[1]);
+				}
+			} else {
+				return randomObject(fieldType);
+			}
+		}
+		return null;
 	}
 
 	/**

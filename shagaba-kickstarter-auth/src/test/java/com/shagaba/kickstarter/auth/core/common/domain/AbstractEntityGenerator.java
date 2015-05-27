@@ -19,6 +19,7 @@ public abstract class AbstractEntityGenerator<T, ID extends Serializable> {
 	public T generate(String tag) {
 		T entity = generate();
 		update(entity, tag);
+		System.out.println(entity);
 		return entity;
 	}
 

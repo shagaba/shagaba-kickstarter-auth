@@ -6,39 +6,58 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.1.RELEASE</version>
 	</parent>
-	<groupId>com.shagaba.kickstarter.auth</groupId>
-	<artifactId>shagaba-kickstarter-auth</artifactId>
+	<groupId>com.shagaba.kickstarter</groupId>
+	<artifactId>shagaba-kickstarter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>shagaba-kickstarter-auth</name>
+	<packaging>pom</packaging>
+	<name>shagaba-kickstarter</name>
 	<description>Authentication and Authorization kickstarter project</description>
-	
+
+	<modules>
+		<module>shagaba-kickstarter-boot</module>
+		<module>shagaba-kickstarter-common</module>
+		<module>shagaba-kickstarter-core</module>
+	</modules>
+
 	<properties>
 		<!-- Generic properties -->
 		<java.version>1.8</java.version>
+		<guava.version>18.0</guava.version>
 		<dozer.version>5.5.1</dozer.version>
 
+		<spring-boot-dependencies.version>1.2.3.RELEASE</spring-boot-dependencies.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- The main class to start by executing java -jar -->
-		<start-class>com.shagaba.kickstarter.auth.application.MainApplication</start-class>
+		<start-class>com.shagaba.kickstarter.application.BootApplication</start-class>
 
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 
 		<!-- Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
-
-		<!-- Spring Boot Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
 		<!-- Spring Boot Data MongoDB -->
@@ -64,24 +83,36 @@
 			<artifactId>httpclient</artifactId>
 		</dependency>
 
-		<!-- Google guava -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>18.0</version>
-		</dependency>
-
 		<!-- Jackson JSON data-binding -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
-		<!-- Bean Mapper -->
+		<!-- Google guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<!-- Dozer Bean Mapper -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
 			<version>${dozer.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+
+		<!-- Spring Boot Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
