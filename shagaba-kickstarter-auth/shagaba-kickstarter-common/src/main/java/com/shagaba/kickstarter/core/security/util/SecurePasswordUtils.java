@@ -15,7 +15,7 @@ public class SecurePasswordUtils {
 	public static final String ALPHABETIC_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
 	public static final String ALPHABETIC_UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	public static final String SIMILAR_CHAR = "oO0ilI1!zZ5$Ss";
-	public static final String AMBIGUOUS_SYMBOL = "{}[]()|/\"~,;:.<>^&*-_";
+	public static final String AMBIGUOUS_SYMBOL = "{}[]()|/\\\"~,;:.<>^&*-_";
 	
 	public enum PasswordType{NUMERIC, ALPHABETIC, ALPHANUMERIC, ALPHANUMERIC_SYMBOL};
 
