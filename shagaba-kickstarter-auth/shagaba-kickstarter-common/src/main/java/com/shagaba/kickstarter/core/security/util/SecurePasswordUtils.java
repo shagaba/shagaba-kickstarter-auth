@@ -11,7 +11,7 @@ public class SecurePasswordUtils {
 
 	public static final int MIN_CHARACTERS_ALLOWED = 6;
 	public static final String NUMERIC = "123467890";
-	public static final String SYMBOL = "~!@#$%^&*()_-+={}[]\|:;"<>,.?/";
+	public static final String SYMBOL = "~!@#$%^&*()_-+={}[]\\|:;\"<>,.?/";
 	public static final String ALPHABETIC_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
 	public static final String ALPHABETIC_UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	public static final String SIMILAR_CHAR = "oO0ilI1!zZ5$Ss";
