@@ -11,11 +11,11 @@ public class SecurePasswordUtils {
 
 	public static final int MIN_CHARACTERS_ALLOWED = 6;
 	public static final String NUMERIC = "123467890";
-	public static final String SYMBOL = "`~!@#$%^&*()_-+={}[]\\|:;\"'<>,.?/";
+	public static final String SYMBOL = "~!@#$%^&*()_-+={}[]\|:;"<>,.?/";
 	public static final String ALPHABETIC_LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
 	public static final String ALPHABETIC_UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	public static final String SIMILAR_CHAR = "oO0ilI1!zZ5$K^";
-	public static final String AMBIGUOUS_SYMBOL = "{}[]()/\\'\"`~,;:.<>";
+	public static final String SIMILAR_CHAR = "oO0ilI1!zZ5$Ss";
+	public static final String AMBIGUOUS_SYMBOL = "{}[]()|/\"~,;:.<>^&*-_";
 	
 	public enum PasswordType{NUMERIC, ALPHABETIC, ALPHANUMERIC, ALPHANUMERIC_SYMBOL};
 
@@ -24,8 +24,8 @@ public class SecurePasswordUtils {
 	 * @param passwordType
 	 * @return
 	 */
-	public static String generatePasswoed(int requiredLength, PasswordType passwordType) {
-		return generatePasswoed(requiredLength, passwordType, true, true);
+	public static String generatePassword(int requiredLength, PasswordType passwordType) {
+		return generatePassword(requiredLength, passwordType, true, true);
 	}
 	
 	/**
@@ -35,10 +35,10 @@ public class SecurePasswordUtils {
 	 * @param excludeAmbiguousSymbols
 	 * @return
 	 */
-	public static String generatePasswoed(int requiredLength, PasswordType passwordType, boolean excludeSimilarChar, boolean excludeAmbiguousSymbols) {
+	public static String generatePassword(int requiredLength, PasswordType passwordType, boolean excludeSimilarChar, boolean excludeAmbiguousSymbols) {
 		String[] sequence = getSequence(passwordType);
 		sequence = filterSequence(excludeSimilarChar, excludeAmbiguousSymbols, sequence);
-		return generatePasswoed(requiredLength, sequence);
+		return generatePassword(requiredLength, sequence);
 	}
 	
 	/**
@@ -92,9 +92,9 @@ public class SecurePasswordUtils {
 	 * @param sequence
 	 * @return
 	 */
-	public static String generatePasswoed(int requiredLength, String... sequence) {
+	public static String generatePassword(int requiredLength, String... sequence) {
 		Random random = new SecureRandom();
-		return generatePasswoed(requiredLength, random, sequence);
+		return generatePassword(requiredLength, random, sequence);
 	}
 	
 	/**
@@ -103,7 +103,7 @@ public class SecurePasswordUtils {
 	 * @param sequence
 	 * @return
 	 */
-	public static String generatePasswoed(int requiredLength, Random random, String... sequence) {
+	public static String generatePassword(int requiredLength, Random random, String... sequence) {
 		String[] passwordSequence = sequence;
 		if (passwordSequence == null || passwordSequence.length == 0) {
 			passwordSequence = getSequence(PasswordType.ALPHANUMERIC_SYMBOL);
